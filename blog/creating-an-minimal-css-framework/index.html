@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>graef</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="/css/style.css" rel="stylesheet" />
+  <meta property="og:title" content="graef - a blog">
+  <meta property="og:description" content="A blog about all the interesting stuff.">
+  <meta property="og:site_name" content="graef">
+  <meta name="theme-color" content="#e45858">
+</head>
+
+<body>
+  <header class="header__header">
+    <hgroup class="header__group">
+      <h1 class="header__title">graef</h1>
+      <nav class="header__navbar">
+        <a href="/">home</a> | <a href="/blog">blog</a> | <a href="/projects">projects</a>
+      </nav>
+    </hgroup>
+  </header>
+  <main class="main__body">
+    <h1>Creating an minimal CSS framework</h1>
+    <p><small>14. February 2024</small></p>
+    <blockquote>
+      <p>
+        I assume you as the reader came to this website to create your own minimal CSS, so I will show you how and what
+        to do. I expect that you have a certain basic understanding of CSS and are able to look up concepts you do not
+        understand.
+      </p>
+      <strong>Go to:</strong> <a href="#project-plan">Project Plan</a> | <a href="#css-reset">CSS Reset</a> |
+      <a href="#normalizing">Normalizing</a>
+    </blockquote>
+    <h2 id="project-plan">Project Plan</h2>
+    <p>
+      The project plan is to create an minimal CSS framework. For that we firstly create an reset, then normalize some
+      elements and then add our own style over it.
+    </p>
+    <p>
+      To let our framework be as minimal as possible, we will not add classes and id's (besides that using id's for
+      frameworks is not an great idea), and we will stay with and simple classsless framework (a framework that only
+      uses semantic html without adding classes).
+    </p>
+    <p>
+      We will mainly focus on following classes to make the framework fairly simple and small:
+    </p>
+    <ul>
+      <li>:root</li>
+      <li>*</li>
+      <li>body</li>
+      <li>main</li>
+      <li>h1, h2, h3, h4, h5, h6</li>
+      <li>p, li</li>
+      <li>ol, ul</li>
+      <li>a</li>
+      <li>code</li>
+      <li>pre, block</li>
+    </ul>
+    <p>
+      Because this limited set of featured elements will not be enough for most framework I will leave further
+      extensions to the reader. Additionally I will give you furter ressources that might help adding or doing things in
+      a complete different way than I have done.
+    </p>
+    <h2 id="css-reset">CSS Reset</h2>
+    <h3>A very basic implementation</h3>
+    <p>
+      The most important thing to make when creating a new CSS framework is to reset the browsers default CSS settings.
+      There are multiple ways to do this, but my personal preference is:
+    </p>
+    <pre>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}</pre>
+    <details class="blogpost__detail">
+      <summary>Aditional notes</summary>
+      <blockquote class="blogpost__tip">
+        <h4>Why do we do this exactly?</h4>
+        <p>
+          There are multiple reasons but the main reason is that most browsers have
+          default CSS style that adds an margin on the <code>body</code> element.<br>
+          The most important part is the <code>box-sizing: border-box</code>. The reason is that it will ensure a good
+          consistency and predictability for the sizing of elements. Mainly because a border will stay
+          in the width and height of an element (see
+          <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing">Mozilla Web Docs</a>).
+        </p>
+      </blockquote>
+    </details>
+    <p>
+      This reset is very minimal, but has quite a big of problems, that we can fix later or we use a very similar
+      approach that does not add styling to elements that we do not want to have changed.</p>
+    <h3>An alternative minimal approach</h3>
+    <pre>
+html {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6, p, ol, li {
+  margin: 0;
+  padding: 0;
+}</pre>
+    <details class="blogpost__detail">
+      <summary>Aditional notes</summary>
+      <blockquote class="blogpost__tip">
+        <h4>Why is this approach better?</h4>
+        <p>
+          Again there are multiple reasons for it, but the most important is that the <code>*</code> selector selects
+          every element in a website. So our second implementation only selects the elements we want to select to not
+          cause issues later.
+        </p>
+        <h4>Further Tips:</h4>
+        <p>
+          We could remove the <code>ul</code> and <code>ol</code> selectors if we want
+          to keep the default padding for the lists.
+        </p>
+      </blockquote>
+    </details>
+    <p>
+      This approach is less extreme but gives most of the benifits of the first version without adding as many
+      drawbacks.
+    </p>
+    <h2 id="normalizing">Normalizing</h2>
+    <p>
+      While normalizing and reseting the default are generally understood to be the same thing, I do prefer to
+      differentiate between these two. That is because I understand the reset to encapsulate multiple different or as in
+      our first implementation all elements of a webpage that do not directly share a different function, for example an
+      paragraph (<code>p</code>) and an image (<code>img</code>).
+    </p>
+    <h3>Dark and Light mode</h3>
+    <p>
+      But before we can style furter we need to go on a small tangent on light and dark mode, espacially as css has
+      features to change the mode depending on the settings of the device you use to visit a website.
+    </p>
+    <p>This would look like:</p>
+    <pre>
+:root {
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+</pre>
+    <p>
+      This code will use the default light and dark mode style. It is a very small hack for now but we will change it
+      <a href="">later</a>.
+    </p>
+    <h3>Font and Body</h3>
+    <p>
+      So lets start to add our minimal styling with the <code>body</code> tag:
+    </p>
+    <pre>
+body {
+  font-size: 16px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0 auto;
+  width: min(65ch, 90%);
+}</pre>
+    <details class="blogpost__detail">
+      <summary>Aditional notes</summary>
+      <blockquote class="blogpost__tip">
+        <h4>Another font-family</h4>
+        <p>
+          While we use a very very long font-family selection . This will absolutely guarantee that a sans-serif font
+          will be rendered, prefereably the font the device, that is visiting our website, is using.
+        </p>
+      </blockquote>
+    </details>
+    <p>
+      This ensures the size of the font is the same on every browser we use, prefereably the font of the system, while
+      also guaranteeing that if the sytem-ui is not given there exist an fallback, ending with
+      <a href="https://en.wikipedia.org/wiki/Sans-serif">sans-serif</a>.
+    </p>
+    <p>
+      Furthermore it centers everything in the <code>body</code> element and gives the body a certain width that is
+      fixed to <em>65 characters</em> on devices with a large width and to <em>90%</em> on devices with a width
+      that is smaller than the <em>65 characters</em>.
+    </p>
+    <p>
+      Additionally everything will now be centered in the middle of the website using our framework.
+    </p>
+    <p>
+      Now lets continue with font settings:
+    </p>
+    <pre>
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+p, li {
+  text-wrap: pretty;
+}</pre>
+    <details class="blogpost__detail">
+      <summary>Aditional notes.</summary>
+      <blockquote class="blogpost__tip">
+        <h4>Problems with <code>balance</code> and <code>pretty</code>.</h4>
+        <p>
+          balance and pretty have both the problem of being computably expansive. Balance has therefor a limit of 5 or
+          10
+          lines, depending on the browser the device is using (see
+          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/text-wrap">Mozilla Web Doc</a>).
+        </p>
+      </blockquote>
+    </details>
+    <p>
+      Sadly because <code>text-wrap</code> is fairly new, not all browsers support it.
+      No the less it is still very helpful to have them, as they help your text to look decent. This means that there
+      will be <strong>no orphaned word</strong> (one word in the last wrapped around line of an paragarph) with
+      <em>pretty</em> and that with <em>balance</em> the text <strong>looks uniform</strong>
+      when it wraps over multiple lines.
+    </p>
+  </main>
+</body>
+
+</html>
