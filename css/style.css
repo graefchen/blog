@@ -44,6 +44,7 @@ body {
 	font-weight: 400;
 	margin: 0 auto;
 	width: min(60ch, 90%);
+	scroll-behavior: smooth;
 }
 
 img {

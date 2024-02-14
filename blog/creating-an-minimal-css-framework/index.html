@@ -31,7 +31,8 @@
         understand.
       </p>
       <strong>Go to:</strong> <a href="#project-plan">Project Plan</a> | <a href="#css-reset">CSS Reset</a> |
-      <a href="#normalizing">Normalizing</a>
+      <a href="#normalizing">Normalizing</a> | <a href="#adding-color">Adding Color</a> |
+      <a href="#conclusion">Conclusion</a> | <a href="#further-work-and-references">Further Work and References</a>
     </blockquote>
     <h2 id="project-plan">Project Plan</h2>
     <p>
@@ -55,8 +56,8 @@
       <li>p, li</li>
       <li>ol, ul</li>
       <li>a</li>
-      <li>code</li>
-      <li>pre, block</li>
+      <li>pre, blockquote</li>
+      <li>img</li>
     </ul>
     <p>
       Because this limited set of featured elements will not be enough for most framework I will leave further
@@ -74,7 +75,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}</pre>
+}
+</pre>
     <details class="blogpost__detail">
       <summary>Aditional notes</summary>
       <blockquote class="blogpost__tip">
@@ -101,7 +103,8 @@ html {
 h1, h2, h3, h4, h5, h6, p, ol, li {
   margin: 0;
   padding: 0;
-}</pre>
+}
+</pre>
     <details class="blogpost__detail">
       <summary>Aditional notes</summary>
       <blockquote class="blogpost__tip">
@@ -148,7 +151,7 @@ h1, h2, h3, h4, h5, h6, p, ol, li {
 </pre>
     <p>
       This code will use the default light and dark mode style. It is a very small hack for now but we will change it
-      <a href="">later</a>.
+      <a href="#adding-color">later</a>.
     </p>
     <h3>Font and Body</h3>
     <p>
@@ -160,13 +163,15 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   margin: 0 auto;
   width: min(65ch, 90%);
-}</pre>
+  line-height: 1.4;
+}
+</pre>
     <details class="blogpost__detail">
       <summary>Aditional notes</summary>
       <blockquote class="blogpost__tip">
         <h4>Another font-family</h4>
         <p>
-          While we use a very very long font-family selection . This will absolutely guarantee that a sans-serif font
+          While we use a very very long font-family selection . This will absolutely guarantes that a sans-serif font
           will be rendered, prefereably the font the device, that is visiting our website, is using.
         </p>
       </blockquote>
@@ -182,7 +187,8 @@ body {
       that is smaller than the <em>65 characters</em>.
     </p>
     <p>
-      Additionally everything will now be centered in the middle of the website using our framework.
+      Additionally everything will now be centered in the middle of the website using our framework. And with the line
+      height set to 1.4, there will be enought room between each line.
     </p>
     <p>
       Now lets continue with font settings:
@@ -194,9 +200,10 @@ h1, h2, h3, h4, h5, h6 {
 
 p, li {
   text-wrap: pretty;
-}</pre>
+}
+</pre>
     <details class="blogpost__detail">
-      <summary>Aditional notes.</summary>
+      <summary>Aditional notes</summary>
       <blockquote class="blogpost__tip">
         <h4>Problems with <code>balance</code> and <code>pretty</code>.</h4>
         <p>
@@ -213,6 +220,195 @@ p, li {
       will be <strong>no orphaned word</strong> (one word in the last wrapped around line of an paragarph) with
       <em>pretty</em> and that with <em>balance</em> the text <strong>looks uniform</strong>
       when it wraps over multiple lines.
+    </p>
+    <h3>Adding margin back</h3>
+    <p>
+      Because we have removed every margin, the website looks a little squished. So we reintruduce a margin with the
+      fllowing code:
+    </p>
+    <pre>
+main > * {
+  margin-bottom: 0.75rem;
+}
+</pre>
+    <p>
+      This line of code ensures that <strong>every</strong> direct child element of <code>main</code> will have an
+      bottom margin of 75% of the root elements size, which is the <code>font-size</code> defined in the body element
+      (in our case 16px if you haven't already altered it).
+    </p>
+    <details class="blogpost__detail">
+      <summary>Aditional note</summary>
+      <blockquote class="blogpost__tip">
+        <p>
+          While we use this in our framework it would be a <em>very very very</em> terrible idea to implement it in a
+          framework that does not conform to the website it is written for, because it
+          <strong>limits the usability</strong>.
+        </p>
+        <p>
+          A way better approach is to add a margin directly to every element, instead of just every child
+          element. Like we will do with the <code>blockquote</code> element <a href="#adding-color">later</a>.
+        </p>
+      </blockquote>
+    </details>
+    <p>
+      While we have added margin to each element we still need to add margins to our list item to make them look decent
+      and distinctive from the paragraphs and other elments.
+    </p>
+    <p>
+      The code for this would look like this:
+    </p>
+    <pre>
+li {
+  margin-left: 2rem;
+}
+</pre>
+    <h3>Adding responsiveness</h3>
+    <p>
+      If we now would add an image or make the width of our screen we still would have some problems with
+      responsiveness, especially with the <code>img</code> and <code>pre</code> elements.
+    </p>
+    <p>
+      For the <code>img</code> we simply add an width to it. So the code looks like this:
+    </p>
+    <pre>
+img {
+  width: 100%;
+}
+</pre>
+    <p>
+      For the <code>pre</code> element we have multiple options, but I personally prefer to do it like this:
+    </p>
+    <pre>
+pre {
+  overflow: auto;
+}
+</pre>
+    <p>
+      This will add an scrollbar at the buttom of the <code>pre</code> element if if the text overflows. As an
+      alternative you could aslo use <code>white-space: pre-wrap;</code>, but I tend to avoid it, as it creates in my
+      opinion a very unpleasent text to read as it wraps around to the start of the line and this can become espacially
+      distracting if some programming language code text is in the element.
+    </p>
+    <h3>The last stretch</h3>
+    <p>
+      While we are nearly done, we still have at least the <code>a</code> and <code>blockquote</code> elemenst missing.
+      We first start with the blockquote and try to make it visually distinctive from all the current elements we have.
+    </p>
+    <p>
+      This is done with this code:
+    </p>
+    <pre>
+blockquote {
+  padding: 1rem;
+}
+</pre>
+    <p>
+      Just adding the padding helps insanely! It now does not look like a normal paragraph anymore.
+    </p>
+    <p>
+      Further we change the <code>a</code> element up, so it does not follow the devices style anymore. And this is
+      achievable with the following code:
+    </p>
+    <pre>
+a {
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px dotted;
+}
+
+a:hover {
+  border-bottom: 1px solid;
+}
+</pre>
+    <p>
+      While the change of the border might trip up some of you, I believe that it is an good alternative to changing the
+      color when the a element is hovered, or just making the link not visually change when hovered over. It is,
+      for me, the perfect mix, not to visually stunning, not to visually overloading.
+    </p>
+    <h2 id="adding-color">Adding Color</h2>
+    <p>
+      We now have come to the best part of the whole framework. Adding all the color we want! But because we still want
+      to achieve a very small frameworkm that also is minimalistic, we only add two colors (for those wo want to add
+      more, check <a href="">here</a> for ideas).
+    </p>
+    <p>
+      We first start with the <code>:root</code> and the media querry:
+    </p>
+    <pre>
+:root {
+  --fg: black;
+  --bg: white;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: white;
+    --bg: black;
+  }
+}
+</pre>
+    <p>
+      We add two variables, fg for the foreground and bg for the background. They change depending on which color scheme
+      the device is using.
+    </p>
+    <p>
+      But this by themself is not enought to make the colorscheme apply itself, so we add this to <code>body</code>:
+    </p>
+    <pre>
+  background-color: var(--bg);
+  color: var(--fg);
+</pre>
+    <p>
+      This two lines will apply the colors correcly.
+    </p>
+    <p>
+      But we can do even more and add a border to the <code>blockquote</code> to make it even more distinctive from
+      other elements with this code:
+    </p>
+    <pre>
+  border-left: var(--fg) 2px solid;
+</pre>
+    <p>
+      The code will just add a small border to the left of the element.
+    </p>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>
+      This was it. That is all you need to do to create an small, minimal (and barely usable) framework.
+      I hope this more or less fairly borderline introductional text might have helped you further understanding CSS, as
+      it helped me when writing this article. Below I will add some more Ideas and References to CSS Resets/Normalizer.
+    </p>
+    <h2 id="further-work-and-references">Further Work and References</h2>
+    <h3>Reset Articles</h3>
+    <p>Here are some more Articles that describe css reset:</p>
+    <ul>
+      <li>
+        <a
+          href="https://www.digitalocean.com/community/tutorials/css-minimal-css-reset">https://www.digitalocean.com/community/tutorials/css-minimal-css-reset</a>
+      </li>
+      <li>
+        <a href="https://blog.hubspot.com/website/css-reset">https://blog.hubspot.com/website/css-reset</a>
+      </li>
+      <li>
+        <a href="https://meyerweb.com/eric/tools/css/reset/">https://meyerweb.com/eric/tools/css/reset/</a>
+      </li>
+      <li>
+        <a
+          href="https://www.joshwcomeau.com/css/custom-css-reset/">https://www.joshwcomeau.com/css/custom-css-reset/</a>
+      </li>
+      <li><a href="https://css-tricks.com/reboot-resets-reasoning/">https://css-tricks.com/reboot-resets-reasoning/</a>
+      </li>
+    </ul>
+    <h3>Repositorys</h3>
+    <p>Here are some github repositorys</p>
+    <ul>
+      <li><a href="https://github.com/csstools/sanitize.css/">https://github.com/csstools/sanitize.css/</a></li>
+      <li><a href="https://github.com/jgthms/minireset.css">https://github.com/jgthms/minireset.css</a></li>
+    </ul>
+    <h3>Further Ideas</h3>
+    <p>
+      There are multiple ways to change things up. I would personally start with the colors. Currently there are only
+      two. I would add another color as an accent and then a color to use to show eleveations, which helps more to
+      distinguish between different elements.
     </p>
   </main>
 </body>
