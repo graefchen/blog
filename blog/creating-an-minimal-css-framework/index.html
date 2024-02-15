@@ -23,7 +23,7 @@
   </header>
   <main class="main__body">
     <h1>Creating an minimal CSS framework</h1>
-    <p><small>14. February 2024</small></p>
+    <p><small>15. February 2024</small></p>
     <blockquote>
       <p>
         I assume you as the reader came to this website to create your own minimal CSS, so I will show you how and what
@@ -291,19 +291,25 @@ pre {
     </p>
     <h3>The last stretch</h3>
     <p>
-      While we are nearly done, we still have at least the <code>a</code> and <code>blockquote</code> elemenst missing.
-      We first start with the blockquote and try to make it visually distinctive from all the current elements we have.
+      While we are nearly done, we still have at least some elements missing. We first start with the
+      <code>blockquote</code>, <code>code</code> and the <code>pre</code> elements. We try to make it visually
+      distinctive from all the current elements we have.
     </p>
     <p>
       This is done with this code:
     </p>
     <pre>
-blockquote {
+pre, blockquote {
   padding: 1rem;
+}
+
+code {
+  border-radius: 5px;
+  padding: 0.25rem;
 }
 </pre>
     <p>
-      Just adding the padding helps insanely! It now does not look like a normal paragraph anymore.
+      Just adding the padding helps insanely! It they do not look like a normal paragraph anymore.
     </p>
     <p>
       Further we change the <code>a</code> element up, so it does not follow the devices style anymore. And this is
@@ -328,28 +334,33 @@ a:hover {
     <h2 id="adding-color">Adding Color</h2>
     <p>
       We now have come to the best part of the whole framework. Adding all the color we want! But because we still want
-      to achieve a very small frameworkm that also is minimalistic, we only add two colors (for those wo want to add
-      more, check <a href="">here</a> for ideas).
+      to achieve a very small frameworkm that also is minimalistic, we only add four colors, one for the background, one
+      for the foreground, one as an accent color and one for showing elevation.
     </p>
     <p>
       We first start with the <code>:root</code> and the media querry:
     </p>
     <pre>
 :root {
-  --fg: black;
-  --bg: white;
+  --fg: #121212;
+  --bg: #fdfdfd;
+  --accent: #fed330;
+  --el: #00000010;
 }
-
+  
 @media (prefers-color-scheme: dark) {
   :root {
-    --fg: white;
-    --bg: black;
+    --fg: #fdfdfd;
+    --bg: #121212;
+    --accent: #fed330;
+    --el: #ffffff10;
   }
 }
 </pre>
     <p>
-      We add two variables, fg for the foreground and bg for the background. They change depending on which color scheme
-      the device is using.
+      We add four variables, fg for the foreground and bg for the background, accent as an accent color for some
+      elements and last an trasnparent color to visually represent eleveation. They change depending on which color
+      scheme the device is prefering.
     </p>
     <p>
       But this by themself is not enought to make the colorscheme apply itself, so we add this to <code>body</code>:
@@ -359,58 +370,63 @@ a:hover {
   color: var(--fg);
 </pre>
     <p>
-      This two lines will apply the colors correcly.
+      This two lines will apply the colors correcly to the whole website.
     </p>
-    <p>
-      But we can do even more and add a border to the <code>blockquote</code> to make it even more distinctive from
-      other elements with this code:
+    <p>Furthermore we still need to add the elevation color to the <code>code</code>, <code>pre</code> and
+      <code>blockquote</code> elements. This is done through the following lines:
     </p>
     <pre>
-  border-left: var(--fg) 2px solid;
-</pre>
+code, pre, blockquote {
+  background-color: var(--el);
+}</pre>
     <p>
-      The code will just add a small border to the left of the element.
+      But we can do even more and add a border to the <code>blockquote</code> to make it even more distinctive from
+      other elements, by adding a small border to its left with this code:
     </p>
+    <pre>
+blockquote {
+  border-left: var(--accent) 2px solid;
+}
+</pre>
     <h2 id="conclusion">Conclusion</h2>
     <p>
       This was it. That is all you need to do to create an small, minimal (and barely usable) framework.
       I hope this more or less fairly borderline introductional text might have helped you further understanding CSS, as
       it helped me when writing this article. Below I will add some more Ideas and References to CSS Resets/Normalizer.
     </p>
-    <p>TYou can fined the finished website <a href="example.html">here</a>. Use it as an reference and improve on it.</p>
+    <p>You can fined the finished website <a href="example.html">here</a>. Use it as an reference and improve on it.
+    </p>
     <h2 id="further-work-and-references">Further Work and References</h2>
-    <h3>Reset Articles</h3>
+    <h3>Articles</h3>
     <p>Here are some more Articles that describe css reset:</p>
     <ul>
       <li>
-        <a
-          href="https://www.digitalocean.com/community/tutorials/css-minimal-css-reset">https://www.digitalocean.com/community/tutorials/css-minimal-css-reset</a>
+        <a href="https://www.digitalocean.com/community/tutorials/css-minimal-css-reset">digitalocean.com</a>, an
+        article about css reset'S.
       </li>
       <li>
-        <a href="https://blog.hubspot.com/website/css-reset">https://blog.hubspot.com/website/css-reset</a>
+        <a href="https://blog.hubspot.com/website/css-reset">blog.hubspot.com</a>, another article about css reset'S.
       </li>
       <li>
-        <a href="https://meyerweb.com/eric/tools/css/reset/">https://meyerweb.com/eric/tools/css/reset/</a>
+        <a href="https://meyerweb.com/eric/tools/css/reset/">meyerweb.com</a>, the, likely, most famous css reset.
       </li>
       <li>
-        <a
-          href="https://www.joshwcomeau.com/css/custom-css-reset/">https://www.joshwcomeau.com/css/custom-css-reset/</a>
+        <a href="https://www.joshwcomeau.com/css/custom-css-reset/">www.joshwcomeau.com</a>, another article about css
+        reset's.
       </li>
-      <li><a href="https://css-tricks.com/reboot-resets-reasoning/">https://css-tricks.com/reboot-resets-reasoning/</a>
+      <li><a href="https://css-tricks.com/reboot-resets-reasoning/">css-tricks.com</a>, an article about the reasoning
+        behind css reset's.
+      </li>
+      <li><a href="https://jgthms.com/web-design-in-4-minutes/">web-design-in-4-minutes</a>, an cool fast guide (better
+        tha this one), about making a website look good with css in 4 minutes.
       </li>
     </ul>
     <h3>Repositorys</h3>
     <p>Here are some github repositorys</p>
     <ul>
-      <li><a href="https://github.com/csstools/sanitize.css/">https://github.com/csstools/sanitize.css/</a></li>
-      <li><a href="https://github.com/jgthms/minireset.css">https://github.com/jgthms/minireset.css</a></li>
+      <li><a href="https://github.com/csstools/sanitize.css">csstools/sanitize.css</a></li>
+      <li><a href="https://github.com/jgthms/minireset.css">jgthms/minireset.css</a></li>
     </ul>
-    <h3>Further Ideas</h3>
-    <p>
-      There are multiple ways to change things up. I would personally start with the colors. Currently there are only
-      two. I would add another color as an accent and then a color to use to show eleveations, which helps more to
-      distinguish between different elements.
-    </p>
   </main>
 </body>
 

@@ -7,15 +7,18 @@
 	<title>example.html</title>
 	<style>
 		:root {
-			/* #fed330 */
-			--fg: black;
-			--bg: white;
+			--fg: #121212;
+			--bg: #fdfdfd;
+			--accent: #fed330;
+			--el: #00000010;
 		}
 
 		@media (prefers-color-scheme: dark) {
 			:root {
-				--fg: white;
-				--bg: black;
+				--fg: #fdfdfd;
+				--bg: #121212;
+				--accent: #fed330;
+				--el: #ffffff10;
 			}
 		}
 
@@ -66,16 +69,31 @@
 			overflow: auto;
 		}
 
+		pre,
 		blockquote {
 			padding: 1rem;
-			border-left: var(--fg) 2px solid;
+		}
+
+		code {
+			border-radius: 5px;
+			padding: 0.25rem;
+		}
+
+		code,
+		pre,
+		blockquote {
+			background-color: var(--el);
+		}
+
+		blockquote {
+			border-left: var(--accent) 2px solid;
 		}
 
 		a {
 			font-weight: 500;
 			text-decoration: none;
 			border-bottom: 1px dotted;
-			color: var(--fg);
+			color: var(--accent);
 		}
 
 		a:hover {
