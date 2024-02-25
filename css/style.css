@@ -52,7 +52,7 @@ img {
 }
 
 main {
-	padding: 1.25rem;
+	padding: 1.25rem 0.75rem;
 }
 
 h1,
@@ -109,6 +109,23 @@ pre {
 
 li {
 	margin-left: 1.2em;
+}
+
+/* 404 Error */
+
+.error__box {
+	margin-top: 2rem;
+	max-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 4px;
+}
+
+.error__message {
+	font-size: 3.75rem;
+	line-height: 5.65rem;
 }
 
 /* The Header */
