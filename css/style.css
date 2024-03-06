@@ -173,6 +173,7 @@ li {
 }
 
 .blogpost__table>tbody>tr>td:first-child {
+	white-space: nowrap;
 	padding-right: 1rem;
 }
 
