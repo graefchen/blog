@@ -75,12 +75,11 @@ li {
 a {
 	color: var(--accent);
 	font-weight: 500;
-	text-decoration: none;
-	border-bottom: var(--accent) 1px dotted;
+	text-decoration: underline;
 }
 
 a:hover {
-	border-bottom: 1px solid;
+	text-decoration-thickness: 2px;
 }
 
 a:visited {
